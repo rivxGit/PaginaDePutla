@@ -1,0 +1,136 @@
+/* --- CONFIGURACIÓN DE COLORES Y FUENTES --- */
+:root {
+    --negro-menu: #121212;
+    --color-vino: #641220;
+    --blanco: #ffffff;
+    --negro-texto: #333333;
+    --gris-claro: #f4f4f4;
+    --fuente-principal: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* --- ESTILOS GENERALES --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fuente-principal);
+    background-color: var(--blanco);
+    color: var(--negro-texto);
+    line-height: 1.8;
+}
+
+p {
+    text-align: justify;
+    text-justify: inter-word;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    color: var(--negro-texto);
+}
+
+strong {
+    color: #000000;
+    font-weight: bold;
+}
+
+/* --- HEADER Y MENÚ --- */
+header {
+    background-color: var(--negro-menu);
+    color: var(--blanco);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.logo h1 { font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
+.logo h1 span { color: var(--color-vino); font-weight: 300; }
+
+nav ul { display: flex; list-style: none; gap: 20px; }
+nav a { color: var(--blanco); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: color 0.3s; }
+nav a:hover { color: var(--color-vino); }
+.btn-destacado { background-color: var(--color-vino); padding: 8px 15px; border-radius: 4px; }
+
+/* --- SECCIÓN HERO --- */
+.hero-turismo {
+    height: 70vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../img/monumento.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-text h2 { font-size: 3rem; margin-bottom: 20px; color: white; }
+.hero-text p { font-size: 1.2rem; margin-bottom: 30px; color: white; text-align: center; }
+
+/* --- INTRODUCCIÓN Y COLUMNA DE IMÁGENES --- */
+.intro { padding: 80px 5%; }
+.contenedor-flex { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+.columna-texto, .columna-imagen { flex: 1; min-width: 300px; }
+.columna-texto h2 { color: var(--color-vino); margin-bottom: 20px; text-align: left; }
+
+/* Ajuste para dos imágenes una abajo de otra */
+.columna-imagen {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.columna-imagen img {
+    width: 100%;
+    height: 300px;
+    border-radius: 8px;
+    object-fit: cover;
+    display: block;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* --- SECCIÓN INTERACTIVA (BOTÓN) --- */
+.seccion-interactiva { padding: 60px 5%; background-color: var(--gris-claro); text-align: center; }
+.tarjeta-interactiva { max-width: 700px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 5px solid var(--color-vino); }
+.tarjeta-interactiva h3 { color: var(--color-vino); margin-bottom: 15px; }
+#texto-curioso { font-size: 1.2rem; min-height: 80px; transition: opacity 0.3s ease; color: #555; text-align: center; }
+
+/* --- BOTÓN DE ACCIÓN --- */
+.boton-accion {
+    padding: 12px 30px;
+    background-color: var(--color-vino);
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.boton-accion:hover { transform: scale(1.1); }
+
+/* --- GRID ATRACTIVOS --- */
+.atractivos { padding: 80px 5%; }
+.contenedor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.tarjeta-turistica { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+.tarjeta-turistica img { width: 100%; height: 200px; object-fit: cover; }
+.info { padding: 20px; }
+.info h4 { color: var(--color-vino); margin-bottom: 10px; }
+
+/* --- FOOTER --- */
+footer { background-color: var(--negro-menu); color: white; padding: 50px 5% 20px 5%; }
+.footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; border-bottom: 1px solid #333; padding-bottom: 30px; }
+.copyright { text-align: center; padding-top: 20px; font-size: 0.8rem; color: #888; }
+
+/* --- MEDIA QUERY --- */
+@media (max-width: 600px) {
+    header { flex-direction: column; }
+    nav ul { margin-top: 15px; flex-direction: column; gap: 10px; }
+    p { text-align: left; }
+}
