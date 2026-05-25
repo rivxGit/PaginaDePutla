@@ -1,3 +1,11 @@
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px; /* Esto evita que el menú negro tape tus títulos al bajar */
+}
+
+/* De aquí para abajo dejas todo el CSS que ya tenías antes... */
+
+
 /* --- CONFIGURACIÓN DE COLORES Y FUENTES --- */
 :root {
     --negro-menu: #121212;
@@ -43,10 +51,18 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap; /* <--- AGREGA ESTO: Permite que el menú baje si no cabe */
     position: sticky;
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+nav ul { 
+    display: flex; 
+    list-style: none; 
+    gap: 25px; 
+    flex-wrap: wrap; /* <--- AGREGA ESTO: Evita que los enlaces se encimen entre sí */
 }
 
 .logo h1 { font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
@@ -88,7 +104,7 @@ nav a:hover { color: var(--color-vino); }
 
 .columna-imagen img {
     width: 100%;
-    height: 300px;
+    height: 400px;
     border-radius: 8px;
     object-fit: cover;
     display: block;
@@ -119,7 +135,7 @@ nav a:hover { color: var(--color-vino); }
 .atractivos { padding: 80px 5%; }
 .contenedor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 .tarjeta-turistica { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-.tarjeta-turistica img { width: 100%; height: 200px; object-fit: cover; }
+.tarjeta-turistica img { width: 100%; height: 300px; object-fit: cover; }
 .info { padding: 20px; }
 .info h4 { color: var(--color-vino); margin-bottom: 10px; }
 
@@ -128,9 +144,150 @@ footer { background-color: var(--negro-menu); color: white; padding: 50px 5% 20p
 .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; border-bottom: 1px solid #333; padding-bottom: 30px; }
 .copyright { text-align: center; padding-top: 20px; font-size: 0.8rem; color: #888; }
 
-/* --- MEDIA QUERY --- */
-@media (max-width: 600px) {
-    header { flex-direction: column; }
-    nav ul { margin-top: 15px; flex-direction: column; gap: 10px; }
-    p { text-align: left; }
+/* --- MEDIA QUERY OPTIMIZADA --- */
+@media (max-width: 850px) { /* Subimos a 850px para evitar que se amontone en tablets */
+    header { 
+        flex-direction: column; 
+        text-align: center;
+        gap: 15px;
+        padding: 20px 5%;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    nav ul { 
+        flex-direction: column; 
+        align-items: center;
+        gap: 12px; 
+        width: 100%;
+    }
+
+    nav a {
+        display: block;
+        padding: 8px 0;
+        font-size: 1rem; /* Un poco más grande para que sea fácil presionar con el dedo */
+    }
+
+    .btn-destacado {
+        display: inline-block;
+        margin-top: 5px;
+        width: auto;
+    }
+
+    /* Evitamos que los textos largos en móviles se vean raros */
+    p { 
+        text-align: left; 
+    }
+}
+
+
+
+/* Busca tu contenedor-grid actual o agrega esto al final */
+.contenedor-grid {
+    display: flex;          /* Usamos flex para controlar las tarjetas */
+    flex-wrap: wrap;        /* ¡ESTO ES LA MAGIA! Hace que las tarjetas nuevas se bajen a la siguiente fila */
+    gap: 20px;              /* Espacio de separación entre tarjetas (lados y abajo) */
+    justify-content: center;/* Centra las tarjetas en la pantalla */
+}
+
+/* Forzamos a que las tarjetas mantengan siempre su tamaño original de tres por fila */
+.tarjeta-turistica {
+    width: 31%;             /* Hace que quepan exactamente 3 tarjetas por fila dejando espacio para el gap */
+    min-width: 280px;       /* Evita que se hagan extremadamente delgadas en pantallas chicas */
+    box-sizing: border-box; /* Evita que los bordes alteren el tamaño de la tarjeta */
+}
+
+
+
+
+
+/* --- ESTILOS EXTRA PARA EL CARNAVAL CREATIVO --- */
+
+/* 1. Imagen de fondo con texto encima (Hero Banner) */
+.hero-carnaval {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('img/portada-carnaval.jpg'); /* Tu imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Efecto Parallax elegante */
+    height: 60vh; /* Ocupa el 60% del alto de la pantalla */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+    padding: 20px;
+}
+
+.hero-carnaval h2 {
+    font-size: 3.5rem;
+    color: #ffffff; /* Forzamos a que sea blanco sobre el fondo oscuro */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    margin-bottom: 10px;
+}
+
+.hero-carnaval p {
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+    max-width: 800px;
+}
+
+/* 2. Truco de Experto: Efecto Invertido Automático (Zig-Zag) */
+/* Esto hace que cada contenedor-flex par dentro del carnaval voltee la imagen y el texto solitos */
+#carnaval .contenedor-flex:nth-of-type(even) {
+    flex-direction: row-reverse;
+}
+
+/* 3. Bloque Creativo de Impacto (Para las comparsas y la vibra de la fiesta) */
+.bloque-experiencia {
+    background-color: #fcf8f8; /* Un fondo sutil color crema/vino muy bajito */
+    border-left: 5px solid var(--color-vino);
+    padding: 30px;
+    margin: 40px auto;
+    max-width: 1000px;
+    border-radius: 0 15px 15px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.bloque-experiencia h3 {
+    color: var(--color-vino);
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+
+
+
+/* =======================================================
+   OPTIMIZACIÓN MÓVIL PARA MENÚ Y ESTRUCTURA GENERAL
+   ======================================================= */
+@media screen and (max-width: 768px) {
+    header {
+        position: static; /* Evita que el menú flote estorbando en pantallas chicas */
+        height: auto;
+        padding: 15px 10px;
+        flex-direction: column; /* Pone el logo PUTLA arriba y los enlaces abajo */
+        gap: 10px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 0;
+    }
+
+    nav ul li a {
+        font-size: 0.95rem; /* Letra un poco más cómoda para presionar con el dedo */
+        padding: 6px 10px;
+    }
+
+    /* Ajuste para la fila de 5 imágenes simétricas */
+    .fila-imagenes-cinco {
+        grid-template-columns: repeat(2, 1fr); /* En celular se verán de dos en dos */
+        gap: 10px;
+        padding: 10px;
+    }
 }

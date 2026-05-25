@@ -1,0 +1,445 @@
+/* =======================================================
+   ESTILOS EXCLUSIVOS PARA PORTADA PRINCIPAL Y CARNAVAL
+   ======================================================= */
+
+/* Suavizado de saltos de menú */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+/* =======================================================
+   DISEÑO EXCLUSIVO PREMIUM COLOR NATURAL SIN FILTROS
+   ======================================================= */
+.hero-tradicional {
+    position: relative;
+    background-image: url('../img/municipio.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    margin-top: 55px;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    /* >>> AGREGA ESTA LÍNEA AQUÍ ABAJO <<< */
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.45); 
+}
+.contenedor-hero-premium {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+/* Columna Izquierda: Mensajes principales */
+.columna-titulos {
+    flex: 1.2;
+}
+
+.grito-carnaval {
+    display: inline-block;
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    font-size: 4.5rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    /* Sombra negra profunda para contrastar con cualquier fondo natural claro */
+    text-shadow: 4px 4px 0px #631222, 5px 5px 15px rgba(0, 0, 0, 0.9);
+    transform: rotate(-3deg);
+    margin-bottom: 20px;
+    animation: flotarGrito 3s ease-in-out infinite alternate;
+}
+
+.columna-titulos h2 {
+    font-size: 3rem;
+    color: #ffffff !important;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0 0 15px 0;
+    /* Sombra extra reforzada para legibilidad sin filtro oscuro */
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9), -1px -1px 0 rgba(0,0,0,0.4);
+    letter-spacing: 1px;
+}
+
+.columna-titulos h3 {
+    font-size: 1.4rem;
+    color: #f1c40f !important; /* Amarillo vibrante tradicional para resaltar */
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+/* Columna Derecha: Bloque poético y figuras orgánicas */
+.columna-diseno {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+}
+
+.bloque-poesia {
+    /* Fondo ligeramente más sólido para que el poema se lea sobre la foto real */
+    background: rgba(20, 3, 6, 0.65);
+    border-right: 4px solid #bfa15f;
+    padding: 20px 25px;
+    border-radius: 12px 0 0 12px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    max-width: 450px;
+}
+
+.frase-celebrada {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #ffffff !important;
+    line-height: 1.6;
+    text-align: right;
+    margin: 0 0 10px 0;
+    font-weight: 400;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+}
+
+.autor-frase {
+    display: block;
+    text-align: right;
+    color: #bfa15f !important;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Mosaico de Formas Fluidas de Fotos */
+.mosaico-formas {
+    position: relative;
+    width: 150%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.forma-organica {
+    width: 180px;
+    height: 180px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.forma-organica img {
+    width: 120%;
+    height: 120%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Formas fluidas asimétricas */
+.f1 { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+.f2 { border-radius: 60% 40% 30% 70% / 50% 30% 70% 50%; }
+.f3 { border-radius: 40% 60% 35% 65% / 60% 40% 60% 40%; }
+
+.forma-organica:hover {
+    transform: translateY(-10px) scale(1.15);
+    border-radius: 12px;
+    z-index: 10;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+}
+
+.forma-organica:hover img {
+    transform: scale(1.08);
+}
+
+/* Animaciones */
+@keyframes flotarGrito {
+    0% { transform: rotate(-3deg) translateY(0); }
+    100% { transform: rotate(-1deg) translateY(-8px); }
+}
+
+
+/* =======================================================
+   ESTILOS INTERMEDIOS Y SECCIÓN DE INTRODUCCIÓN
+   ======================================================= */
+.bloque-texto-grande {
+    text-align: center;
+    max-width: 950px;
+    margin: 40px auto 40px auto;
+}
+
+.bloque-texto-grande p {
+    font-size: 1.25rem;
+    line-height: 1.9;
+    text-align: justify;
+    color: #333333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.fila-imagenes-cinco {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.caja-imagen-cinco {
+    flex: 1;
+    min-width: 180px;
+    height: 220px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.caja-imagen-cinco img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.caja-imagen-cinco img:hover {
+    transform: scale(1.04);
+}
+
+
+/* =======================================================
+   ESTILOS DE SECCIÓN DE CARNAVAL (ZIG-ZAG)
+   ======================================================= */
+.contenedor-flex-carnaval {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+
+.columna-texto-carnaval {
+    flex: 1;
+}
+
+.columna-texto-carnaval h3 {
+    color: #631222;
+    font-size: 2.1rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.columna-texto-carnaval p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    text-align: justify;
+    color: #444444;
+}
+
+.columna-imagen-carnaval {
+    flex: 1;
+    text-align: center;
+}
+
+.columna-imagen-carnaval img {
+    max-width: 75%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+#carnaval .contenedor-flex-carnaval:nth-of-type(even) {
+    flex-direction: row-reverse;
+}
+
+.bloque-experiencia {
+    background-color: #fdfafb;
+    border-left: 5px solid #631222;
+    padding: 35px;
+    margin: 30px auto;
+    max-width: 1100px;
+    border-radius: 0 15px 15px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.bloque-experiencia h3 {
+    color: #631222;
+    font-size: 1.8rem;
+    margin: 0 0 15px 0;
+}
+
+.bloque-experiencia p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    text-align: justify;
+    color: #333333;
+    margin: 0;
+}
+
+
+/* =======================================================
+   OPTIMIZACIÓN MÓVIL PARA LA PORTADA Y CARNAVAL
+   ======================================================= */
+@media screen and (max-width: 768px) {
+    .hero-tradicional {
+        height: auto;
+        padding: 60px 0;
+    }
+    .contenedor-hero-premium {
+        flex-direction: column !important;
+        text-align: center;
+        gap: 40px;
+        padding: 0 20px;
+    }
+    .grito-carnaval {
+        font-size: 3rem;
+        margin-bottom: 10px;
+    }
+    .columna-titulos h2 {
+        font-size: 1.8rem;
+    }
+    .columna-titulos h3 {
+        font-size: 1.1rem;
+    }
+    .bloque-poesia {
+        text-align: center;
+        border-right: none;
+        border-left: 4px solid #bfa15f;
+        border-radius: 0 12px 12px 0;
+        max-width: 100%;
+    }
+    .frase-celebrada, .autor-frase {
+        text-align: center;
+    }
+    .mosaico-formas {
+        height: auto;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    .forma-organica {
+        width: 100px;
+        height: 140px;
+    }
+    .contenedor-flex-carnaval {
+        flex-direction: column !important;
+        gap: 25px;
+        padding: 30px 20px;
+    }
+    .columna-imagen-carnaval img {
+        max-width: 100%;
+    }
+    .columna-texto-carnaval h3 {
+        font-size: 1.6rem;
+        text-align: center;
+    }
+    .columna-texto-carnaval p {
+        font-size: 1rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =======================================================
+   SISTEMA DE GRID DE ALTA PRECISIÓN PARA EL COLLAGE
+   ======================================================= */
+.collage-contenedor {
+    display: grid;
+    /* Divide la pantalla en columnas proporcionales */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    /* Bloquea las filas a 220px de alto para mantener control total */
+    grid-auto-rows: 220px;
+    /* Algoritmo inteligente que rellena espacios vacíos automáticamente */
+    grid-auto-flow: dense; 
+    gap: 16px;
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Base de cada cuadro contenedor */
+.item-collage {
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    background-color: #fcfcfc;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* La imagen se adapta al cuadro de forma perfecta sin perder proporción */
+.item-collage img {
+    width: 100%;
+    height: 100%;
+    /* Recorta sutilmente los sobrantes manteniendo la escala natural de la foto */
+    object-fit: cover; 
+    /* Centra la imagen enfocándose un poco más hacia arriba para no cortar rostros */
+    object-position: center 25%; 
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+/* --- REGLAS DE COMPORTAMIENTO ASIMÉTRICO --- */
+
+/* Las fotos horizontales/panorámicas se extienden a lo ancho (2 columnas) */
+.item-collage.ancho {
+    grid-column: span 2;
+}
+
+/* Las fotos verticales (Tiliches/Mascaritas) se extienden hacia abajo (2 filas) */
+.item-collage.alto {
+    grid-row: span 2;
+}
+
+/* Foto estandarte o destacada (Abarca un cuadrante gigante de 2x2) */
+.item-collage.grande {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+/* --- EFECTO INTERACTIVO DE ENFOQUE --- */
+.item-collage:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+    z-index: 10;
+}
+.item-collage:hover img {
+    transform: scale(1.03); /* Zoom suave y controlado */
+}
+
+/* =======================================================
+   ADAPTACIÓN FLUIDA PARA PANTALLAS MÓVILES (CELULARES)
+   ======================================================= */
+@media screen and (max-width: 768px) {
+    .collage-contenedor {
+        grid-template-columns: repeat(2, 1fr); /* Estructura estable de 2 columnas fijas */
+        grid-auto-rows: 150px; /* Altura más cómoda para deslizar con el dedo */
+        gap: 10px;
+        padding: 0 10px;
+    }
+    
+    /* Reajustamos las jerarquías para que todo encaje en el ancho del teléfono */
+    .item-collage.ancho, 
+    .item-collage.grande {
+        grid-column: span 2;
+    }
+    .item-collage.alto {
+        grid-row: span 2;
+    }
+}
