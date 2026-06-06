@@ -443,3 +443,55 @@ html {
         grid-row: span 2;
     }
 }
+
+/* =======================================================
+   REDISEÑO RESPONSIVO PARA EL MENÚ DE NAVEGACIÓN
+   ======================================================= */
+
+/* Esto controla la barra de navegación completa */
+nav, .menu-navegacion {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Distribuye el título a la izquierda y enlaces a la derecha */
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #111111;      /* Fondo oscuro elegante */
+}
+
+/* Fuerza a que la lista de enlaces se mantenga en una sola línea horizontal en PC */
+nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;                      /* Espacio entre cada botón */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* =======================================================
+   ADAPTACIÓN PARA CELULARES (PANTALLAS CHICAS)
+   ======================================================= */
+@media screen and (max-width: 768px) {
+    /* 1. Evitamos que el menú abarque toda la pantalla vertical */
+    nav, .menu-navegacion {
+        flex-direction: column;     /* Alinea título arriba y botones abajo de forma ordenada */
+        gap: 12px;
+        padding: 12px 10px;
+    }
+
+    /* 2. ¡EL TRUCO CLAVE! Volvemos los enlaces horizontales y compactos */
+    nav ul {
+        display: flex;
+        flex-direction: row;        /* Los obliga a ponerse uno al lado del otro, no encimados */
+        flex-wrap: wrap;            /* Si son muchos, bajan ordenadamente en una segunda línea corta */
+        justify-content: center;    /* Centra los botones en el teléfono */
+        gap: 10px 15px;             /* Separación pequeña y sutil */
+    }
+
+    /* 3. Estilizado de los enlaces para que parezcan botones limpios en celular */
+    nav ul li a, .menu-navegacion a {
+        font-size: 14px;            /* Reducimos un poquito la letra para que quepan bien */
+        padding: 6px 10px;
+        display: inline-block;
+    }
+}
