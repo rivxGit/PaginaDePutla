@@ -291,3 +291,10 @@ footer { background-color: var(--negro-menu); color: white; padding: 50px 5% 20p
         padding: 10px;
     }
 }
+/* Alinea de forma homogénea los textos de los párrafos informativos */
+.atractivos p, 
+#inicio p {
+    text-align: justify;
+    text-justify: inter-word; /* Distribuye el espacio de forma limpia entre palabras */
+    line-height: 1.6;         /* Le da un aire extra para que en celular sea más cómodo de leer */
+}
