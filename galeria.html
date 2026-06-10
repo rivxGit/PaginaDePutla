@@ -3,56 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Primera Página</title>
+    <title>Galería del Carnaval de Putla</title>
+    
+    <link rel="stylesheet" href="css/carnaval.css">
+    <link rel="stylesheet" href="css/galeria.css">
 </head>
 <body>
     
-<!-- Tu estilo de siempre que no se va a modificar -->
-    <link rel="stylesheet" href="css/carnaval.css">
-    
-    <!-- El nuevo estilo exclusivo para el formulario -->
-    <link rel="stylesheet" href="css/galeria.css">
-</head>
+    <section class="seccion-formulario">
+        <div class="contenedor"> 
+            <h2 class="titulo-seccion">Compartir Fotografías</h2> 
+            <p class="subtitulo">Sube tu foto de Tiliches, Mascaritas o comparsas. Aparecerá en el collage tras ser aprobada.</p>
 
+            <form id="form-subir-foto" class="formulario-estilizado">
+                <div class="grupo-campo">
+                    <label for="txt-titulo">¿Qué pasa en la foto? (Título corto):</label>
+                    <input type="text" id="txt-titulo" placeholder="Ej. Traje de Tiliche tradicional" required>
+                </div>
 
-<section class="seccion-formulario">
-    <div class="contenedor"> <h2 class="titulo-seccion">Compartir Fotografías</h2> <p class="subtitulo">Sube tu foto de Tiliches, Mascaritas o comparsas. Aparecerá en el collage tras ser aprobada.</p>
+                <div class="grupo-campo">
+                    <label for="file-imagen">Selecciona tu fotografía (.jpg, .png):</label>
+                    <input type="file" id="file-imagen" accept="image/*" required>
+                </div>
 
-        <form id="form-subir-foto" class="formulario-estilizado">
-            <div class="grupo-campo">
-                <label for="txt-titulo">¿Qué pasa en la foto? (Título corto):</label>
-                <input type="text" id="txt-titulo" placeholder="Ej. Traje de Tiliche tradicional" required>
+                <button type="submit" id="btn-enviar" class="btn-principal">Enviar al Administrador</button>
+            </form>
+        </div>
+    </section>
+
+    <div class="contenedor">
+        <div id="collage-galeria" class="grid-collage">
             </div>
-
-            <div class="grupo-campo">
-                <label for="file-imagen">Selecciona tu fotografía (.jpg, .png):</label>
-                <input type="file" id="file-imagen" accept="image/*" required>
-            </div>
-
-            <button type="submit" id="btn-enviar" class="btn-principal">Enviar</button>
-        </form>
-
     </div>
-</section>
-
-
-<!-- El contenedor del collage dinámico -->
-<div class="contenedor">
-    <div id="collage-galeria" class="grid-collage">
-        <!-- JavaScript meterá las fotos aquí adentro automáticamente -->
-    </div>
-</div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script src="js/config.js"></script>
 
-    <script src="js/galeria dinamica.js"></script>
-</body>
-
-
-
-
+    <script src="js/galeria-dinamica.js"></script>
 </body>
 </html>
