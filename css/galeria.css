@@ -33,3 +33,45 @@
     border-radius: 8px;
     display: block;
 }
+
+/* AJUSTES PARA CELULARES (Pantallas menores a 600px) */
+@media (max-width: 600px) {
+    /* 1. Reduce el padding de la sección del formulario */
+    .seccion-formulario {
+        padding: 30px 0; 
+    }
+
+    /* 2. Compacta el formulario */
+    .formulario-estilizado {
+        padding: 20px;
+        width: 95%;
+    }
+
+    /* 3. Reduce un poco el tamaño de títulos y fuentes */
+    .seccion-formulario .titulo-seccion {
+        font-size: 1.5rem;
+    }
+    
+    .seccion-formulario .subtitulo {
+        font-size: 0.85rem;
+        margin-bottom: 20px;
+    }
+
+    /* 4. Ajusta los campos de entrada para que no sean tan altos */
+    .formulario-estilizado input[type="text"], 
+    .formulario-estilizado input[type="file"] {
+        padding: 10px;
+    }
+
+    /* 5. Ajusta el botón para que sea cómodo pero no gigante */
+    .formulario-estilizado .btn-principal {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+
+    /* 6. Espaciado más compacto en la galería */
+    .collage-contenedor {
+        margin: 20px auto;
+        gap: 10px;
+    }
+}
