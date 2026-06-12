@@ -3,7 +3,6 @@ const CLAVE_PROYECTO = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmF
 
 const baseDatos = window.supabase.createClient(URL_PROYECTO, CLAVE_PROYECTO);
 
-// Función que carga las fotos en modo lista
 async function cargarCollage() {
     const contenedor = document.getElementById('collage-galeria');
     if (!contenedor) return; 
@@ -15,7 +14,7 @@ async function cargarCollage() {
 
     if (error) return;
 
-    contenedor.innerHTML = ""; // Limpia el contenedor
+    contenedor.innerHTML = ""; 
 
     fotos.forEach(foto => {
         const item = document.createElement('div');
