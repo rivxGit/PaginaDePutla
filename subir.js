@@ -47,16 +47,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const urlPublica = dataUrl.publicUrl;
 
-            // C) EVALUAR DISEÑO
+            // C) EVALUAR DISEÑO (ASIGNACIÓN AUTOMÁTICA DE TAMAÑOS)
             const img = new Image();
             img.src = URL.createObjectURL(archivo);
 
             img.onload = async () => {
                 let claseDiseno = "normal";
                 if (img.width > img.height * 1.2) {
-                    claseDiseno = "ancho";
+                    claseDiseno = "ancho"; // Se extenderá a 2 columnas en tu CSS
                 } else if (img.height > img.width * 1.2) {
-                    claseDiseno = "alto";
+                    claseDiseno = "alto";  // Se extenderá a 2 filas en tu CSS
                 }
 
                 // D) INSERTAR EN LA BASE DE DATOS
@@ -94,12 +94,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// --- CÓDIGO PARA MOSTRAR LAS FOTOS EN EL COLLAGE ---
+// --- CÓDIGO ACTUALIZADO CON TU DISEÑO DE ALTA PRECISIÓN ---
 async function cargarCollage() {
     const contenedor = document.getElementById('collage-galeria');
     if (!contenedor) return; 
 
-    // 1. Descargar de Supabase solo las fotos aprobadas
+    // 1. Descargar de Supabase únicamente las fotos aprobadas
     const { data: fotos, error } = await baseDatos
         .from('galeria_fotos')
         .select('*')
@@ -110,28 +110,24 @@ async function cargarCollage() {
         return;
     }
 
-    // 2. Limpiar el contenedor por completo
+    // 2. Limpiar el contenedor por completo para evitar divs fantasmas
     contenedor.innerHTML = "";
 
-    // 3. Pintar cada foto usando la estructura exacta de tus estilos CSS
+    // 3. Pintar clonando exactamente la estructura de tu CSS nativo
     fotos.forEach(foto => {
         const item = document.createElement('div');
         
-        // Aplica la clase 'item-collage' seguida del tamaño de tu base de datos ('ancho', 'alto', 'normal')
+        // Define la clase base 'item-collage' y concatena su comportamiento ('ancho', 'alto' o 'normal')
         item.className = `item-collage ${foto.clase_diseno || 'normal'}`; 
         
-        // Estructura HTML idéntica a tus tarjetas fijas sin estilos en línea estorbando
+        // Estructura idéntica a tus imágenes estáticas (Directas, sin tarjetas ni textos extras abajo)
         item.innerHTML = `
-            <div class="tarjeta-galeria">
-                <img src="${foto.ruta_imagen}" alt="${foto.titulo}">
-                <div class="pie-foto">
-                    <p>${foto.titulo}</p>
-                </div>
-            </div>
+            <img src="${foto.ruta_imagen}" alt="${foto.titulo || 'Imagen de Carnaval'}">
         `;
+        
         contenedor.appendChild(item);
     });
 }
 
-// Ejecutar la función automáticamente en cuanto cargue la página
+// Inicializar la carga automática del collage al abrir la página
 document.addEventListener('DOMContentLoaded', cargarCollage);
