@@ -1,4 +1,4 @@
-// CONEXIÓN DIRECTA WITH VARIABLES ÚNICAS
+// CONEXIÓN DIRECTA CON VARIABLES ÚNICAS
 const URL_PROYECTO = "https://svnlwqzdfmiolxzbjnqb.supabase.co";
 const CLAVE_PROYECTO = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN2bmx3cXpkZm1pb2x4emJqbnFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3Nzc1ODgsImV4cCI6MjA5NjM1MzU4OH0.xGmge2VPqKK96RcYKiZMQYN0MVKaH-bf7nZJuaeKDQw";
 
@@ -94,38 +94,38 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// --- CÓDIGO PARA MOSTRAR LAS FOTOS EN EL COLLAGE (MODIFICADO PARA TU DISEÑO) ---
+// --- CÓDIGO PARA MOSTRAR LAS FOTOS EN EL COLLAGE ---
 async function cargarCollage() {
     const contenedor = document.getElementById('collage-galeria');
-    if (!contenedor) return; // Si no encuentra el contenedor, no hace nada
+    if (!contenedor) return; 
 
     // 1. Descargar de Supabase solo las fotos aprobadas
     const { data: fotos, error } = await baseDatos
         .from('galeria_fotos')
         .select('*')
-        .eq('estado', 'aprobado'); // Filtro estricto en minúsculas
+        .eq('estado', 'aprobado'); 
 
     if (error) {
         console.error("Error al traer las fotos:", error.message);
         return;
     }
 
-    // 2. Limpiar el contenedor por si acaso
+    // 2. Limpiar el contenedor
     contenedor.innerHTML = "";
 
-    // 3. Pintar cada foto usando tus clases de mosaico exactas
+    // 3. Pintar cada foto controlando el tamaño máximo
     fotos.forEach(foto => {
         const item = document.createElement('div');
         
-        // Combina el comportamiento del collage con el tamaño que calculó Supabase ('ancho', 'alto', etc.)
+        // Unimos tu clase del collage con el tamaño asignado
         item.className = `item-collage ${foto.clase_diseno || 'normal'}`; 
         
-        // Estructura HTML idéntica a tus fotos originales con bordes redondeados y ajuste perfecto
+        // Agregamos max-width y max-height para obligar a la computadora a no agigantar la foto
         item.innerHTML = `
-            <div class="tarjeta-galeria">
-                <img src="${foto.ruta_imagen}" alt="${foto.titulo}" style="width:100%; height:100%; object-fit:cover; border-radius:12px;">
-                <div class="pie-foto">
-                    <p style="text-align:center; font-weight:bold; margin-top:5px; color:#fff;">${foto.titulo}</p>
+            <div class="tarjeta-galeria" style="max-width: 100%; width: 100%; margin: 0 auto; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <img src="${foto.ruta_imagen}" alt="${foto.titulo}" style="width: 100%; height: 250px; object-fit: cover; display: block; border-radius: 12px 12px 0 0;">
+                <div class="pie-foto" style="background: #222; padding: 10px; text-align: center;">
+                    <p style="font-weight: bold; margin: 0; color: #fff; font-size: 14px;">${foto.titulo}</p>
                 </div>
             </div>
         `;
