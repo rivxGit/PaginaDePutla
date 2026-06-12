@@ -1,43 +1,32 @@
-/* =============================================================
-   1. ESTILO DEL FORMULARIO (Lo que ya tenías)
-   ============================================================= */
-.seccion-formulario { padding: 80px 0; background-color: transparent; display: flex; justify-content: center; align-items: center; }
-
+/* --- FORMULARIO --- */
+.seccion-formulario { padding: 80px 0; display: flex; justify-content: center; align-items: center; }
 .formulario-estilizado { 
-    max-width: 500px; width: 100%; margin: 0 auto; 
+    max-width: 500px; width: 90%; margin: 0 auto; 
     background: linear-gradient(145deg, #161616, #1f1f1f); 
     border: 1px solid rgba(255, 255, 255, 0.06); padding: 40px; 
     border-radius: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7); 
 }
-
-.formulario-estilizado input[type="text"], 
-.formulario-estilizado input[type="file"] { 
+.formulario-estilizado input[type="text"], .formulario-estilizado input[type="file"] { 
     width: 100%; padding: 14px; background-color: #0d0d0d; 
-    border: 1px solid #2e2e2e; border-radius: 8px; color: #ffffff; 
+    border: 1px solid #2e2e2e; border-radius: 8px; color: #ffffff; box-sizing: border-box;
 }
-
 .formulario-estilizado .btn-principal { 
     background: linear-gradient(135deg, #4a0e17, #691c24); 
     color: #ffffff; padding: 16px; border: none; border-radius: 8px; 
-    width: 100%; cursor: pointer; text-transform: uppercase; 
+    width: 100%; cursor: pointer; text-transform: uppercase; font-weight: 700;
 }
 
-/* =============================================================
-   2. ESTILO DE LA GALERÍA (Lista vertical sencilla)
-   ============================================================= */
+/* --- GALERÍA CENTRADA --- */
 .collage-contenedor {
     display: flex;
     flex-direction: column; 
     gap: 20px; 
+    width: 90%;
     max-width: 600px;
-    margin: 40px auto; /* Separado del formulario */
-    padding: 20px;
+    margin: 40px auto; 
+    align-items: center;
 }
-
-.item-collage {
-    width: 100%;
-}
-
+.item-collage { width: 100%; }
 .item-collage img {
     width: 100%;
     height: auto; 
