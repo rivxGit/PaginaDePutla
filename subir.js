@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     formulario.addEventListener("submit", async (e) => {
         e.preventDefault();
-
         const titulo = document.getElementById("txt-titulo").value.trim();
         const inputImagen = document.getElementById("file-imagen");
 
@@ -22,70 +21,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const archivo = inputImagen.files[0];
-        
         if (botonEnviar) {
             botonEnviar.disabled = true;
-            botonEnviar.innerText = "Subiendo fotografía...";
+            botonEnviar.innerText = "Subiendo...";
         }
 
         try {
             const nombreArchivo = `${Date.now()}_${archivo.name.replace(/\s+/g, "_")}`;
-
-            // A) SUBIR AL STORAGE
-            const { data: dataStorage, error: errorStorage } = await baseDatos
-                .storage
-                .from("fotos-putla")
-                .upload(nombreArchivo, archivo);
-
+            const { error: errorStorage } = await baseDatos.storage.from("fotos-putla").upload(nombreArchivo, archivo);
             if (errorStorage) throw errorStorage;
 
-            // B) OBTENER URL PÚBLICA
-            const { data: dataUrl } = baseDatos
-                .storage
-                .from("fotos-putla")
-                .getPublicUrl(nombreArchivo);
-
-            const urlPublica = dataUrl.publicUrl;
-
-            // C) EVALUAR DISEÑO
-            const img = new Image();
-            img.src = URL.createObjectURL(archivo);
-
-            img.onload = async () => {
-                let claseDiseno = "normal";
-                if (img.width > img.height * 1.2) {
-                    claseDiseno = "ancho";
-                } else if (img.height > img.width * 1.2) {
-                    claseDiseno = "alto";
-                }
-
-                // D) INSERTAR EN LA BASE DE DATOS
-                const { error: errorDB } = await baseDatos
-                    .from("galeria_fotos")
-                    .insert([
-                        {
-                            titulo: titulo,
-                            ruta_imagen: urlPublica,
-                            clase_diseno: claseDiseno,
-                            estado: "pendiente"
-                        }
-                    ]);
-
-                if (errorDB) throw errorDB;
-
-                alert("¡Fotografía enviada con éxito! Aparecerá en el collage cuando el administrador la apruebe.");
-                formulario.reset();
-                
-                if (botonEnviar) {
-                    botonEnviar.disabled = false;
-                    botonEnviar.innerText = "Enviar al Administrador";
-                }
-            };
-
-        } catch (error) {
-            console.error("Error completo:", error);
-            alert("Hubo un problema al subir tu foto: " + (error.message || error));
+            const { data: dataUrl } = baseDatos.storage.from("fotos-putla").getPublicUrl(nombreArchivo);
             
+            await baseDatos.from("galeria_fotos").insert([{
+                titulo: titulo,
+                ruta_imagen: dataUrl.publicUrl,
+                estado: "pendiente"
+            }]);
+
+            alert("¡Fotografía enviada! Aparecerá tras ser aprobada.");
+            formulario.reset();
+        } catch (error) {
+            alert("Error: " + error.message);
+        } finally {
             if (botonEnviar) {
                 botonEnviar.disabled = false;
                 botonEnviar.innerText = "Enviar al Administrador";
@@ -94,40 +52,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// --- FUNCIÓN ÚNICA Y CORRECTA PARA CARGAR FOTOS SIN BORRAR LO QUE YA TIENES ---
+// --- ESTA ES LA PARTE QUE BUSCABAS ---
 async function cargarCollage() {
     const contenedor = document.getElementById('collage-galeria');
     if (!contenedor) return; 
 
-    // 1. Descargar de Supabase únicamente las fotos aprobadas
     const { data: fotos, error } = await baseDatos
         .from('galeria_fotos')
         .select('*')
         .eq('estado', 'aprobado'); 
 
-    if (error) {
-        console.error("Error al traer las fotos:", error.message);
-        return;
-    }
+    if (error) return;
 
-    // 2. IMPORTANTE: NO usamos innerHTML = "". 
-    // Así mantenemos tus fotos fijas que escribiste a mano en el HTML.
-
-    // 3. Pintamos las fotos de la base de datos al final de las que ya tienes
+    // Inyectamos las fotos; el CSS se encarga de acomodarlas por su cuenta
     fotos.forEach(foto => {
         const item = document.createElement('div');
-        
-        // Define la clase base 'item-collage' y el diseño automático
-        item.className = `item-collage ${foto.clase_diseno || 'normal'}`; 
-        
-        // Estructura idéntica a tus imágenes estáticas
-        item.innerHTML = `
-            <img src="${foto.ruta_imagen}" alt="${foto.titulo || 'Imagen de Carnaval'}">
-        `;
-        
+        item.className = 'item-collage'; 
+        item.innerHTML = `<img src="${foto.ruta_imagen}" alt="${foto.titulo}">`;
         contenedor.appendChild(item);
     });
 }
 
-// Inicializar la carga
 document.addEventListener('DOMContentLoaded', cargarCollage);
