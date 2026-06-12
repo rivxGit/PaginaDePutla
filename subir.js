@@ -110,22 +110,22 @@ async function cargarCollage() {
         return;
     }
 
-    // 2. Limpiar el contenedor
+    // 2. Limpiar el contenedor por completo
     contenedor.innerHTML = "";
 
-    // 3. Pintar cada foto controlando el tamaño máximo
+    // 3. Pintar cada foto usando la estructura exacta de tus estilos CSS
     fotos.forEach(foto => {
         const item = document.createElement('div');
         
-        // Unimos tu clase del collage con el tamaño asignado
+        // Aplica la clase 'item-collage' seguida del tamaño de tu base de datos ('ancho', 'alto', 'normal')
         item.className = `item-collage ${foto.clase_diseno || 'normal'}`; 
         
-        // Agregamos max-width y max-height para obligar a la computadora a no agigantar la foto
+        // Estructura HTML idéntica a tus tarjetas fijas sin estilos en línea estorbando
         item.innerHTML = `
-            <div class="tarjeta-galeria" style="max-width: 100%; width: 100%; margin: 0 auto; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                <img src="${foto.ruta_imagen}" alt="${foto.titulo}" style="width: 100%; height: 250px; object-fit: cover; display: block; border-radius: 12px 12px 0 0;">
-                <div class="pie-foto" style="background: #222; padding: 10px; text-align: center;">
-                    <p style="font-weight: bold; margin: 0; color: #fff; font-size: 14px;">${foto.titulo}</p>
+            <div class="tarjeta-galeria">
+                <img src="${foto.ruta_imagen}" alt="${foto.titulo}">
+                <div class="pie-foto">
+                    <p>${foto.titulo}</p>
                 </div>
             </div>
         `;
@@ -133,5 +133,5 @@ async function cargarCollage() {
     });
 }
 
-// Ejecutar la función en cuanto cargue la página
+// Ejecutar la función automáticamente en cuanto cargue la página
 document.addEventListener('DOMContentLoaded', cargarCollage);
