@@ -1,4 +1,9 @@
-// js/galeria-dinamica.js
+// CONFIGURACIÓN DIRECTA DE LA BASE DE DATOS
+const ENLACE_URL = "https://svnlwqzdfmiolxzbjnqb.supabase.co";
+const LLAVE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdWJhYmFzZSIsInJlZiI6InN2bmx3cXpkZm1pb2x4emJqbnFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU2M2F1b2I0MH0.xGmge2VPqKK96RcYKjZMQYN";
+
+// Inicializamos la conexión con un nombre que JAMÁS va a chocar con el navegador
+const bdPutla = window.supabase.createClient(ENLACE_URL, LLAVE_KEY);
 
 document.addEventListener("DOMContentLoaded", () => {
     const formulario = document.getElementById("form-subir-foto");
@@ -25,19 +30,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            // Generar un nombre único para el archivo
+            // Nombre único para el archivo de imagen
             const nombreArchivo = `${Date.now()}_${archivo.name.replace(/\s+/g, "_")}`;
 
-            // A) SUBIR EL ARCHIVO AL STORAGE
-            const { data: dataStorage, error: errorStorage } = await supabase
+            // A) SUBIR LA FOTO AL STORAGE
+            const { data: dataStorage, error: errorStorage } = await bdPutla
                 .storage
                 .from("fotos-putla")
                 .upload(nombreArchivo, archivo);
 
             if (errorStorage) throw errorStorage;
 
-            // B) OBTENER LA URL PÚBLICA
-            const { data: dataUrl } = supabase
+            // B) OBTENER LA URL PÚBLICA DE LA FOTO
+            const { data: dataUrl } = bdPutla
                 .storage
                 .from("fotos-putla")
                 .getPublicUrl(nombreArchivo);
@@ -56,8 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     claseDiseno = "alto";
                 }
 
-                // D) INSERTAR EN LA BASE DE DATOS
-                const { error: errorDB } = await supabase
+                // D) INSERTAR EL REGISTRO EN LA TABLA DE SUPABASE
+                const { error: errorDB } = await bdPutla
                     .from("galeria_fotos")
                     .insert([
                         {
