@@ -93,3 +93,40 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+// --- CÓDIGO PARA MOSTRAR LAS FOTOS EN EL COLLAGE ---
+async function cargarCollage() {
+    const contenedor = document.getElementById('collage-galeria');
+    if (!contenedor) return; // Si no encuentra el contenedor, no hace nada
+
+    // 1. Descargar de Supabase solo las fotos aprobadas
+    const { data: fotos, error } = await baseDatos
+        .from('galeria_fotos')
+        .select('*')
+        .eq('estado', 'aprobado'); // Filtro estricto en minúsculas
+
+    if (error) {
+        console.error("Error al traer las fotos:", error.message);
+        return;
+    }
+
+    // 2. Limpiar el contenedor por si acaso
+    contenedor.innerHTML = "";
+
+    // 3. Pintar cada foto en el HTML usando tus clases de diseño
+    fotos.forEach(foto => {
+        const item = document.createElement('div');
+        
+        // Le asignamos la clase correspondiente ('ancho', etc.) que guardamos
+        item.className = `clase-${foto.clase_diseno || 'normal'}`; 
+        
+        item.innerHTML = `
+            <img src="${foto.ruta_imagen}" alt="${foto.titulo}" style="width:100%; height:auto; border-radius:8px;">
+            <p style="text-align:center; font-weight:bold; margin-top:5px;">${foto.titulo}</p>
+        `;
+        contenedor.appendChild(item);
+    });
+}
+
+// Ejecutar la función en cuanto cargue la página
+document.addEventListener('DOMContentLoaded', cargarCollage);
