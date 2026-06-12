@@ -1,8 +1,5 @@
-// El archivo inicia directo aquí, sin declarar SUPABASE_URL ni SUPABASE_KEY arriba
-document.addEventListener("DOMContentLoaded", () => {
-    const formulario = document.getElementById("form-subir-foto");
-    const botonEnviar = document.getElementById("btn-enviar");
-// 2. LÓGICA INTERACTIVA DEL FORMULARIO
+// js/galeria-dinamica.js
+
 document.addEventListener("DOMContentLoaded", () => {
     const formulario = document.getElementById("form-subir-foto");
     const botonEnviar = document.getElementById("btn-enviar");
@@ -22,34 +19,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const archivo = inputImagen.files[0];
         
-        // Cambiar el estado del botón mientras se procesa
         if (botonEnviar) {
             botonEnviar.disabled = true;
             botonEnviar.innerText = "Subiendo fotografía...";
         }
 
         try {
-            // Generar un nombre único para el archivo en el Storage
+            // Generar un nombre único para el archivo
             const nombreArchivo = `${Date.now()}_${archivo.name.replace(/\s+/g, "_")}`;
 
             // A) SUBIR EL ARCHIVO AL STORAGE
-            // Usamos 'clienteSupabase' en lugar de la palabra que chocaba
-            const { data: dataStorage, error: errorStorage } = await clienteSupabase
+            const { data: dataStorage, error: errorStorage } = await supabase
                 .storage
                 .from("fotos-putla")
                 .upload(nombreArchivo, archivo);
 
             if (errorStorage) throw errorStorage;
 
-            // B) OBTENER LA URL PÚBLICA DE LA IMAGEN
-            const { data: dataUrl } = clienteSupabase
+            // B) OBTENER LA URL PÚBLICA
+            const { data: dataUrl } = supabase
                 .storage
                 .from("fotos-putla")
                 .getPublicUrl(nombreArchivo);
 
             const urlPublica = dataUrl.publicUrl;
 
-            // C) CALCULAR LAS DIMENSIONES PARA EL DISEÑO DEL COLLAGE
+            // C) CALCULAR DIMENSIONES PARA EL COLLAGE
             const img = new Image();
             img.src = URL.createObjectURL(archivo);
 
@@ -61,8 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     claseDiseno = "alto";
                 }
 
-                // D) INSERTAR LA FILA EN LA BASE DE DATOS
-                const { error: errorDB } = await clienteSupabase
+                // D) INSERTAR EN LA BASE DE DATOS
+                const { error: errorDB } = await supabase
                     .from("galeria_fotos")
                     .insert([
                         {
@@ -95,5 +90,3 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
-
-               
