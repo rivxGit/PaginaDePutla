@@ -1,9 +1,8 @@
-// CONFIGURACIÓN DIRECTA DE LA BASE DE DATOS
-const ENLACE_URL = "https://svnlwqzdfmiolxzbjnqb.supabase.co";
-const LLAVE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdWJhYmFzZSIsInJlZiI6InN2bmx3cXpkZm1pb2x4emJqbnFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU2M2F1b2I0MH0.xGmge2VPqKK96RcYKjZMQYN";
+// CONEXIÓN DIRECTA CON VARIABLES ÚNICAS
+const URL_PROYECTO = "https://svnlwqzdfmiolxzbjnqb.supabase.co";
+const CLAVE_PROYECTO = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdWJhYmFzZSIsInJlZiI6InN2bmx3cXpkZm1pb2x4emJqbnFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU2M2F1b2I0MH0.xGmge2VPqKK96RcYKjZMQYN";
 
-// Inicializamos la conexión con un nombre que JAMÁS va a chocar con el navegador
-const bdPutla = window.supabase.createClient(ENLACE_URL, LLAVE_KEY);
+const baseDatos = window.supabase.createClient(URL_PROYECTO, CLAVE_PROYECTO);
 
 document.addEventListener("DOMContentLoaded", () => {
     const formulario = document.getElementById("form-subir-foto");
@@ -30,26 +29,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            // Nombre único para el archivo de imagen
             const nombreArchivo = `${Date.now()}_${archivo.name.replace(/\s+/g, "_")}`;
 
-            // A) SUBIR LA FOTO AL STORAGE
-            const { data: dataStorage, error: errorStorage } = await bdPutla
+            // A) SUBIR AL STORAGE
+            const { data: dataStorage, error: errorStorage } = await baseDatos
                 .storage
                 .from("fotos-putla")
                 .upload(nombreArchivo, archivo);
 
             if (errorStorage) throw errorStorage;
 
-            // B) OBTENER LA URL PÚBLICA DE LA FOTO
-            const { data: dataUrl } = bdPutla
+            // B) OBTENER URL PÚBLICA
+            const { data: dataUrl } = baseDatos
                 .storage
                 .from("fotos-putla")
                 .getPublicUrl(nombreArchivo);
 
             const urlPublica = dataUrl.publicUrl;
 
-            // C) CALCULAR DIMENSIONES PARA EL COLLAGE
+            // C) EVALUAR DISEÑO
             const img = new Image();
             img.src = URL.createObjectURL(archivo);
 
@@ -61,8 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     claseDiseno = "alto";
                 }
 
-                // D) INSERTAR EL REGISTRO EN LA TABLA DE SUPABASE
-                const { error: errorDB } = await bdPutla
+                // D) INSERTAR EN LA BASE DE DATOS
+                const { error: errorDB } = await baseDatos
                     .from("galeria_fotos")
                     .insert([
                         {
