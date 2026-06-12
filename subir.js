@@ -47,16 +47,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const urlPublica = dataUrl.publicUrl;
 
-            // C) EVALUAR DISEÑO (ASIGNACIÓN AUTOMÁTICA DE TAMAÑOS)
+            // C) EVALUAR DISEÑO
             const img = new Image();
             img.src = URL.createObjectURL(archivo);
 
             img.onload = async () => {
                 let claseDiseno = "normal";
                 if (img.width > img.height * 1.2) {
-                    claseDiseno = "ancho"; // Se extenderá a 2 columnas en tu CSS
+                    claseDiseno = "ancho";
                 } else if (img.height > img.width * 1.2) {
-                    claseDiseno = "alto";  // Se extenderá a 2 filas en tu CSS
+                    claseDiseno = "alto";
                 }
 
                 // D) INSERTAR EN LA BASE DE DATOS
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// --- CÓDIGO ACTUALIZADO CON TU DISEÑO DE ALTA PRECISIÓN ---
+// --- FUNCIÓN ÚNICA Y CORRECTA PARA CARGAR FOTOS SIN BORRAR LO QUE YA TIENES ---
 async function cargarCollage() {
     const contenedor = document.getElementById('collage-galeria');
     if (!contenedor) return; 
@@ -110,17 +110,17 @@ async function cargarCollage() {
         return;
     }
 
-    // 2. Limpiar el contenedor por completo para evitar divs fantasmas
-    contenedor.innerHTML = "";
+    // 2. IMPORTANTE: NO usamos innerHTML = "". 
+    // Así mantenemos tus fotos fijas que escribiste a mano en el HTML.
 
-    // 3. Pintar clonando exactamente la estructura de tu CSS nativo
+    // 3. Pintamos las fotos de la base de datos al final de las que ya tienes
     fotos.forEach(foto => {
         const item = document.createElement('div');
         
-        // Define la clase base 'item-collage' y concatena su comportamiento ('ancho', 'alto' o 'normal')
+        // Define la clase base 'item-collage' y el diseño automático
         item.className = `item-collage ${foto.clase_diseno || 'normal'}`; 
         
-        // Estructura idéntica a tus imágenes estáticas (Directas, sin tarjetas ni textos extras abajo)
+        // Estructura idéntica a tus imágenes estáticas
         item.innerHTML = `
             <img src="${foto.ruta_imagen}" alt="${foto.titulo || 'Imagen de Carnaval'}">
         `;
@@ -129,5 +129,5 @@ async function cargarCollage() {
     });
 }
 
-// Inicializar la carga automática del collage al abrir la página
+// Inicializar la carga
 document.addEventListener('DOMContentLoaded', cargarCollage);
