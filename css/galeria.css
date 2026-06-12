@@ -1,10 +1,36 @@
-/* Contenedor principal: lista vertical */
+/* =============================================================
+   1. ESTILO DEL FORMULARIO (Lo que ya tenías)
+   ============================================================= */
+.seccion-formulario { padding: 80px 0; background-color: transparent; display: flex; justify-content: center; align-items: center; }
+
+.formulario-estilizado { 
+    max-width: 500px; width: 100%; margin: 0 auto; 
+    background: linear-gradient(145deg, #161616, #1f1f1f); 
+    border: 1px solid rgba(255, 255, 255, 0.06); padding: 40px; 
+    border-radius: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7); 
+}
+
+.formulario-estilizado input[type="text"], 
+.formulario-estilizado input[type="file"] { 
+    width: 100%; padding: 14px; background-color: #0d0d0d; 
+    border: 1px solid #2e2e2e; border-radius: 8px; color: #ffffff; 
+}
+
+.formulario-estilizado .btn-principal { 
+    background: linear-gradient(135deg, #4a0e17, #691c24); 
+    color: #ffffff; padding: 16px; border: none; border-radius: 8px; 
+    width: 100%; cursor: pointer; text-transform: uppercase; 
+}
+
+/* =============================================================
+   2. ESTILO DE LA GALERÍA (Lista vertical sencilla)
+   ============================================================= */
 .collage-contenedor {
     display: flex;
-    flex-direction: column; /* Esto pone una imagen debajo de otra */
-    gap: 20px; /* Espacio entre fotos */
+    flex-direction: column; 
+    gap: 20px; 
     max-width: 600px;
-    margin: 0 auto;
+    margin: 40px auto; /* Separado del formulario */
     padding: 20px;
 }
 
@@ -14,7 +40,7 @@
 
 .item-collage img {
     width: 100%;
-    height: auto; /* Mantiene la proporción original de la foto */
+    height: auto; 
     border-radius: 8px;
     display: block;
 }
