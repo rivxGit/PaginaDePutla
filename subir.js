@@ -1,6 +1,6 @@
 // CONEXIÓN DIRECTA CON VARIABLES ÚNICAS
 const URL_PROYECTO = "https://svnlwqzdfmiolxzbjnqb.supabase.co";
-const CLAVE_PROYECTO = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdWJhYmFzZSIsInJlZiI6InN2bmx3cXpkZm1pb2x4emJqbnFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU2M2F1b2I0MH0.xGmge2VPqKK96RcYKjZMQYN";
+const CLAVE_PROYECTO = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN2bmx3cXpkZm1pb2x4emJqbnFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3Nzc1ODgsImV4cCI6MjA5NjM1MzU4OH0.xGmge2VPqKK96RcYKiZMQYN0MVKaH-bf7nZJuaeKDQw";
 
 const baseDatos = window.supabase.createClient(URL_PROYECTO, CLAVE_PROYECTO);
 
