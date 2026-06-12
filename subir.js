@@ -1,4 +1,4 @@
-// CONEXIÓN DIRECTA CON VARIABLES ÚNICAS
+// CONEXIÓN DIRECTA WITH VARIABLES ÚNICAS
 const URL_PROYECTO = "https://svnlwqzdfmiolxzbjnqb.supabase.co";
 const CLAVE_PROYECTO = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN2bmx3cXpkZm1pb2x4emJqbnFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3Nzc1ODgsImV4cCI6MjA5NjM1MzU4OH0.xGmge2VPqKK96RcYKiZMQYN0MVKaH-bf7nZJuaeKDQw";
 
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// --- CÓDIGO PARA MOSTRAR LAS FOTOS EN EL COLLAGE ---
+// --- CÓDIGO PARA MOSTRAR LAS FOTOS EN EL COLLAGE (MODIFICADO PARA TU DISEÑO) ---
 async function cargarCollage() {
     const contenedor = document.getElementById('collage-galeria');
     if (!contenedor) return; // Si no encuentra el contenedor, no hace nada
@@ -113,16 +113,21 @@ async function cargarCollage() {
     // 2. Limpiar el contenedor por si acaso
     contenedor.innerHTML = "";
 
-    // 3. Pintar cada foto en el HTML usando tus clases de diseño
+    // 3. Pintar cada foto usando tus clases de mosaico exactas
     fotos.forEach(foto => {
         const item = document.createElement('div');
         
-        // Le asignamos la clase correspondiente ('ancho', etc.) que guardamos
-        item.className = `clase-${foto.clase_diseno || 'normal'}`; 
+        // Combina el comportamiento del collage con el tamaño que calculó Supabase ('ancho', 'alto', etc.)
+        item.className = `item-collage ${foto.clase_diseno || 'normal'}`; 
         
+        // Estructura HTML idéntica a tus fotos originales con bordes redondeados y ajuste perfecto
         item.innerHTML = `
-            <img src="${foto.ruta_imagen}" alt="${foto.titulo}" style="width:100%; height:auto; border-radius:8px;">
-            <p style="text-align:center; font-weight:bold; margin-top:5px;">${foto.titulo}</p>
+            <div class="tarjeta-galeria">
+                <img src="${foto.ruta_imagen}" alt="${foto.titulo}" style="width:100%; height:100%; object-fit:cover; border-radius:12px;">
+                <div class="pie-foto">
+                    <p style="text-align:center; font-weight:bold; margin-top:5px; color:#fff;">${foto.titulo}</p>
+                </div>
+            </div>
         `;
         contenedor.appendChild(item);
     });
