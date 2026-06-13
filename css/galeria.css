@@ -1,3 +1,38 @@
+/* Estilo base del menú */
+.menu-navegacion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background-color: #0d0d0d;
+    border-bottom: 1px solid #2e2e2e;
+}
+
+.logo .texto-logo { font-size: 1.5rem; font-weight: 800; color: #ffffff; }
+.logo .sub-logo { font-size: 1.5rem; color: #691c24; margin-left: 5px; }
+
+.lista-menu { display: flex; list-style: none; gap: 20px; }
+.lista-menu a { 
+    text-decoration: none; 
+    color: #ffffff; 
+    font-size: 0.9rem; 
+    font-weight: 600; 
+    transition: color 0.3s;
+}
+.lista-menu a:hover { color: #8c2632; }
+
+/* Botón destacado del menú */
+.btn-activo { 
+    background: #691c24; 
+    padding: 10px 20px; 
+    border-radius: 6px; 
+}
+
+/* Ajuste para celular: el menú se apila si es muy estrecho */
+@media (max-width: 768px) {
+    .menu-navegacion { flex-direction: column; gap: 15px; }
+    .lista-menu { flex-wrap: wrap; justify-content: center; gap: 10px; }
+}
 /* --- FORMULARIO --- */
 .seccion-formulario { padding: 80px 0; display: flex; justify-content: center; align-items: center; }
 .formulario-estilizado { 
